@@ -1,18 +1,29 @@
+sudo: required
+
 language: ruby
 
-rvm:
-  - ruby-2.5.5
+services:
+  - docker
 
-before_script:
-  - gem install bundler:1.17.3
-  - bundle exec rake db:create
-  - bundle exec rake db:migrate
+before_install:
+  - echo "Testing Docker Hub credentials"
+  - docker login -e=$DOCKER_EMAIL -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD
+  - echo "Docker Hub credentials are working"
+  - docker build -t docloader .
+  - docker run -it -d --publish 0.0.0.0:3000:3000 --name=docloader docloader
+  - docker ps -a
+  - docker run docloader /bin/sh -c "bundle exec rake test"
 
 script:
   - bundle exec rake test
 
-services:
-  - postgresql
-
-addons:
-  postgresql: "9.4"
+after_success:
+  - echo "Test Success - Branch($TRAVIS_BRANCH) Pull Request($TRAVIS_PULL_REQUEST) Tag($TRAVIS_TAG)"
+  - if [[ "$TRAVIS_BRANCH" == "master" ]]; then echo -e "Push Container to Docker Hub"; fi
+  - docker login -e=$DOCKER_EMAIL -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD
+  - export REPO=jayjohnson/rails-app
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+  - docker build -f Dockerfile -t $REPO:$COMMIT .
+  - docker tag $REPO:$COMMIT $REPO:$TAG
+  - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
+  - docker push $REPO
