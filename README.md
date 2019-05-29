@@ -36,6 +36,12 @@ If you make changes to the Gemfile or the Compose file to try out some different
 
 ## Acknowledgements
 - https://docs.docker.com/compose/rails/
+- https://docs.travis-ci.com/user/docker/
+- https://docs.docker.com/registry/deploying/
+- https://docs.travis-ci.com/user/environment-variables#encrypting-environment-variables
+- https://edgeguides.rubyonrails.org/active_storage_overview.html
+- https://www.engineyard.com/blog/active-storage
+- https://tech.kartenmacherei.de/scaling-activestorage-21e962f708d7
 
 ## Author
 Sylvance Kerandi.

@@ -1,29 +1,28 @@
 sudo: required
-
 language: ruby
-
 services:
-  - docker
-
+- docker
+env:
+  matrix:
+  - DOCKER_COMPOSE_VERSION=1.4.2
+  - secure: vDX/a3ijYFuZypAgZ55K8hA2dh4617gh2XUqeU3ZmnbnamVBUXXowvs5kU1lrfZ8b27ZOmZzQtiV/XV5YJZBZMLbIRLA0UDQXr8RBQ9+yACaTI0lumoe3SV2L3EFPw5xxLQKFAb6/4a1n5Ei98v+w73bpSPb7p6h8JZzrSUA4lYjGMa2MmS45lfCwpA78IXYjrPoovyi9tbLOOZoBSuGTYMTafRFZ/risKI74A+6UNm+rCrBdHJw/q9riH/UXJ0XXe4gf6wj1XbAyzJUvC0a+pgvmPPbR9VjvkyAzqVTVi8PwYeGG5qJs79PATJIREeBLMK9TPUKFgwS1yAn/O3TaoQIgOzwVMTpCdh6FJD6vjH8PH9RiJiTnMOet2Z14zUiu3cTOfWKBOVZku/hLY9whA3NRtZfZ7grgQ2ivGnmRqJpMIc1nvLVztBV9msaNPZvqN9tdcxkHtsMdj4y0PMTZGN5W26oavA5e9GJBr9uakhi7IQTfdRAmJ0JR8rYxAbC0Pzd9+Wn6x3CqOuIIc2I/QhWdKVU5sMQZFG7TL8Eq52bHj4SSkWZikDlRbwhwI/3kFlN+btSBwuzkczxAjlPiMn8Kz5LDHRVOnt6lCjcoZ0ARO4aTdvkXH2cXjy8HHSfsR8oJa0CsMr0zpgRSxia4Cy58GW2yPLmXJeOhkEprW8=
+  - secure: Zn2aRimc64j+YIl8aTLr0CSCv1XuVESXcXgchs2nCQQyJcF/Nx+xlu8C6rZpxmDLSHMdCh2PEc9MQgAb20zzwPdOh/g8VhN6oHe6LLsH2JkDqPk6/fF96mIFYKeeuxodCIGgfKXPcz0idsbsvBX7buhQS9jFSsFYQK94YNVanXfizNiyOkR28dOSgMuGaHxfSHTdD2jmdgNd9AR1359BP8xp0tiZySqvHLylxd1m8lSLB4KY95sQHVxQDEZH1uDXNkBTsSzalZZGIAV5mnhMKqaSz1TVLXYDoAjJoPwSEiPh7lWy0+HMFo0QvJQVIZT9eRbPvpytwKhUzD3IKbIMMEnIh3A6TElSezwwpLz9udZyK2O8E2fYTfSAgm5wYXMFzmJtH9Jg35jN5COKDDP8qD2RfWLC1YoVQlUHpDQ1DLw6LHNGW9xjOxRsgU2TWAq0uRHIDgL40+Ci47fAeqWpjyn+K9xlmUFCAPiRw7AR/GP724xPqTNRZdko8LgE99e5/DlmWFU4FDohaoCMmuJUIQkxIP4qokL0Sd0vwtp+Ldad4Rq3D8gjiy3uMmywSzPaeu8AOMiUBWSYt/7YWUjztc6vvcijKGRYfleun0H9XW2+L0Z+ClaWsdO+ekhPPrZHnCirImetrq/1EFgiOJQy5wg6kBwSZOAE65mMqffRy48=
 before_install:
-  - echo "Testing Docker Hub credentials"
-  - docker login -e=$DOCKER_EMAIL -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD
-  - echo "Docker Hub credentials are working"
-  - docker build -t docloader .
-  - docker run -it -d --publish 0.0.0.0:3000:3000 --name=docloader docloader
-  - docker ps -a
-  - docker run docloader /bin/sh -c "bundle exec rake test"
-
+- sudo rm /usr/local/bin/docker-compose
+- curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname
+  -s`-`uname -m` > docker-compose
+- chmod +x docker-compose
+- sudo mv docker-compose /usr/local/bin
+- docker-compose --version
+- echo "Testing Docker Hub credentials"
+- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin https://hub.docker.com/
+- echo "Docker Hub credentials are working"
+- docker-compose build
+- docker push sylvance/docloader:latest
 script:
-  - bundle exec rake test
-
-after_success:
-  - echo "Test Success - Branch($TRAVIS_BRANCH) Pull Request($TRAVIS_PULL_REQUEST) Tag($TRAVIS_TAG)"
-  - if [[ "$TRAVIS_BRANCH" == "master" ]]; then echo -e "Push Container to Docker Hub"; fi
-  - docker login -e=$DOCKER_EMAIL -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD
-  - export REPO=jayjohnson/rails-app
-  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
-  - docker build -f Dockerfile -t $REPO:$COMMIT .
-  - docker tag $REPO:$COMMIT $REPO:$TAG
-  - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
-  - docker push $REPO
+- bundle exec rake test
+deploy:
+  provider: script
+  script: bash docker_heroku_push
+  on:
+    branch: master
