@@ -9,6 +9,8 @@ A simple document management application.
 
 ## Installation
 - Clone this repository.
+- Run `docker-compose build`.
+- Run `docker-compose run web bundle install`.
 - Run `docker-compose up`.
 - Go to `localhost:3000` to view the application.
 
