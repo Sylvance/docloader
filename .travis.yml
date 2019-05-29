@@ -15,7 +15,7 @@ before_install:
 - sudo mv docker-compose /usr/local/bin
 - docker-compose --version
 - echo "Testing Docker Hub credentials"
-- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin https://hub.docker.com/
+- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 - echo "Docker Hub credentials are working"
 - docker-compose build
 - docker push sylvance/docloader:latest
