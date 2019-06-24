@@ -1,0 +1,5 @@
+#!/bin/bash
+# heroku run --app ${APP_NAME} bundle exec rails db:migrate
+heroku run --app ${APP_NAME} rake db:migrate
+heroku container:release web -a ${APP_NAME}
+echo -e "Visit this url to view site ${PROD_URL}"

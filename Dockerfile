@@ -3,12 +3,12 @@ LABEL email="kerandisylvance@gmail.com"
 LABEL version=3.1
 
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
-RUN mkdir /myapp
-WORKDIR /myapp
-COPY Gemfile /myapp/Gemfile
-COPY Gemfile.lock /myapp/Gemfile.lock
+RUN mkdir /docloader
+WORKDIR /docloader
+COPY Gemfile /docloader/Gemfile
+COPY Gemfile.lock /docloader/Gemfile.lock
 RUN bundle install
-COPY . /myapp
+COPY . /docloader
 
 # Add a script to be executed every time the container starts.
 COPY entrypoint.sh /usr/bin/

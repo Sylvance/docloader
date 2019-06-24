@@ -1,18 +1,24 @@
-default: &default
-  adapter: postgresql
-  encoding: unicode
-  host: db
-  username: postgres
-  password:
-  pool: 5
-
 development:
-  <<: *default
-  database: myapp_development
+  adapter: postgresql
+  host: localhost
+  username: user
+  database: app-dev
+# default: &default
+#   adapter: postgresql
+#   encoding: unicode
+#   host: db
+#   username: postgres
+#   password:
+#   pool: 5
 
-test:
-  <<: *default
-  database: myapp_test
+# development:
+#   <<: *default
+#   database: docloader_development
+
+# test:
+#   <<: *default
+#   database: docloader_test
+
 # # PostgreSQL. Versions 9.1 and up are supported.
 # #
 # # Install the pg driver:
@@ -38,13 +44,13 @@ test:
 
 # development:
 #   <<: *default
-#   database: myapp_development
+#   database: docloader_development
 
 #   # The specified database role being used to connect to postgres.
 #   # To create additional roles in postgres see `$ createuser --help`.
 #   # When left blank, postgres will use the default role. This is
 #   # the same name as the operating system user that initialized the database.
-#   #username: myapp
+#   #username: docloader
 
 #   # The password associated with the postgres role (username).
 #   #password:
@@ -59,7 +65,7 @@ test:
 #   #port: 5432
 
 #   # Schema search path. The server defaults to $user,public
-#   #schema_search_path: myapp,sharedapp,public
+#   #schema_search_path: docloader,sharedapp,public
 
 #   # Minimum log levels, in increasing order:
 #   #   debug5, debug4, debug3, debug2, debug1,
@@ -72,7 +78,7 @@ test:
 # # Do not set this db to the same as development or production.
 # test:
 #   <<: *default
-#   database: myapp_test
+#   database: docloader_test
 
 # # As with config/secrets.yml, you never want to store sensitive information,
 # # like your database password, in your source code. If your source code is
@@ -95,6 +101,6 @@ test:
 # #
 # production:
 #   <<: *default
-#   database: myapp_production
-#   username: myapp
-#   password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
+#   database: docloader_production
+#   username: docloader
+#   password: <%= ENV['DOCLOADER_DATABASE_PASSWORD'] %>
