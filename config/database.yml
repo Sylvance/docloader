@@ -1,24 +1,23 @@
-development:
-  adapter: postgresql
-  host: localhost
-  username: user
-  database: app-dev
-# default: &default
-#   adapter: postgresql
-#   encoding: unicode
-#   host: db
-#   username: postgres
-#   password:
-#   pool: 5
-
 # development:
-#   <<: *default
-#   database: docloader_development
+#   adapter: postgresql
+#   host: localhost
+#   username: user
+#   database: app-dev
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: db
+  username: postgres
+  password:
+  pool: 5
 
-# test:
-#   <<: *default
-#   database: docloader_test
+development:
+  <<: *default
+  database: docloader_development
 
+test:
+  <<: *default
+  database: docloader_test
 # # PostgreSQL. Versions 9.1 and up are supported.
 # #
 # # Install the pg driver:
