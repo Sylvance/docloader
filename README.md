@@ -42,11 +42,16 @@ If you make changes to the Gemfile or the Compose file to try out some different
 
 - Run `docker-compose run web /bin/bash`
 - Then run `rspec spec/path_to_spec_file`
+
+## Running the database
+
+- To create DB; `docker-compose run --rm web rake db:create`.
+- To migrate DB; `docker-compose run --rm web rake db:migrate`.
   
 ## One-off run to create app
 
 - Run, `heroku apps:create docloader`.
-- Run this to add postgresql addon on Heroku `rails new collabfield --database=postgresql`.
+- Run this to add postgresql addon on Heroku `heroku addons:create heroku-postgresql:hobby-dev`.
 - To create DB run, `heroku run --app docloader rake db:create`.
 
 ## Acknowledgements

@@ -7,6 +7,7 @@ services:
 before_script:
   - curl https://cli-assets.heroku.com/install.sh | sh
   - echo -e "machine api.heroku.com\n  login $HEROKU_USERNAME\n  password $HEROKU_AUTH_TOKEN\nmachine git.heroku.com\n  login $HEROKU_USERNAME\n  password $HEROKU_AUTH_TOKEN" >> ~/.netrc
+  - echo "Logging into the Heroku container!"
   - heroku container:login
   - sudo /etc/init.d/postgresql stop
   - docker-compose build
