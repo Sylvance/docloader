@@ -7,6 +7,7 @@ RUN mkdir /docloader
 WORKDIR /docloader
 COPY Gemfile /docloader/Gemfile
 COPY Gemfile.lock /docloader/Gemfile.lock
+RUN bundle update --bundler
 RUN bundle install
 COPY . /docloader
 
