@@ -4,6 +4,9 @@ python: "3.6"
 services:
   - docker
 
+before_install:
+  - gem install -v 1.17.3 bundler --no-rdoc --no-ri
+
 before_script:
   - curl https://cli-assets.heroku.com/install.sh | sh
   - echo -e "machine api.heroku.com\n  login $HEROKU_USERNAME\n  password $HEROKU_AUTH_TOKEN\nmachine git.heroku.com\n  login $HEROKU_USERNAME\n  password $HEROKU_AUTH_TOKEN" >> ~/.netrc
