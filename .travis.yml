@@ -24,6 +24,6 @@ after_success:
 
 deploy:
   - provider: script
-    script: bash docker_heroku_release
+    script: heroku container:release web -a ${APP_NAME} && echo -e "Visit this url to view site ${PROD_URL}"
     on:
       branch: master
