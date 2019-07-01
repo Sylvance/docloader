@@ -1,4 +1,5 @@
 # Docloader
+[![Build Status](https://travis-ci.org/Sylvance/docloader.svg?branch=master)](https://travis-ci.org/Sylvance/docloader)
 
 A simple document management application.
 
