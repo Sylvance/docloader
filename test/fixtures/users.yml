@@ -9,5 +9,5 @@ one:
 two:
   email: two@mail.com
   password_digest: <%= BCrypt::Password.create('secret') %>
-  username: MyString
-  bio: MyText
+  username: MyString2
+  bio: MyText2
