@@ -1,8 +1,13 @@
 # Docloader
+
 [![Build Status](https://travis-ci.org/Sylvance/docloader.svg?branch=master)](https://travis-ci.org/Sylvance/docloader)
-[![Coverage Status](https://coveralls.io/repos/github/Sylvance/docloader/badge.svg?branch=master)](https://coveralls.io/github/Sylvance/docloader?branch=master)
+[![codecov](https://codecov.io/gh/Sylvance/docloader/branch/master/graph/badge.svg)](https://codecov.io/gh/Sylvance/docloader)
 
 A simple document management application.
+
+## Deployment
+
+<https://docloader.herokuapp.com/>
 
 ## Ruby version
 
@@ -43,7 +48,8 @@ If you make changes to the Gemfile or the Compose file to try out some different
 ## Running tests
 
 - Run `docker-compose run web /bin/bash`
-- Then run `rspec spec/path_to_spec_file`
+- Then run `docker-composae run web rake test`
+- Todo: add Rspec to use `rspec spec/path_to_spec_file`
 
 ## Running the database
 
