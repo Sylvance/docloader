@@ -20,6 +20,7 @@ script:
   - docker-compose run --rm web bundle exec rake test
 
 after_success:
+  - CI=true TRAVIS=true coveralls --verbose
   - heroku container:push web -a ${APP_NAME}
 
 deploy:
