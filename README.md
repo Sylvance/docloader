@@ -1,5 +1,6 @@
 # Docloader
 [![Build Status](https://travis-ci.org/Sylvance/docloader.svg?branch=master)](https://travis-ci.org/Sylvance/docloader)
+[![Coverage Status](https://coveralls.io/repos/github/Sylvance/docloader/badge.svg?branch=master)](https://coveralls.io/github/Sylvance/docloader?branch=master)
 
 A simple document management application.
 
