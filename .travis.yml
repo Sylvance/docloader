@@ -20,11 +20,11 @@ script:
   - docker-compose run --rm web bundle exec rake test
 
 after_success:
-  - CI=true TRAVIS=true coveralls --verbose
-  - heroku container:push web -a ${APP_NAME}
+  - heroku container:push web -a docloader
+  - heroku run --app docloader rake db:migrate
 
 deploy:
   - provider: script
-    script: heroku container:release web -a ${APP_NAME} && echo -e "Visit this url to view site ${PROD_URL}"
+    script: heroku container:release web -a docloader && echo -e "Visit this url to view site ${PROD_URL}"
     on:
       branch: master
