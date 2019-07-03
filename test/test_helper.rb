@@ -6,6 +6,9 @@ SimpleCov.start 'rails' do
   add_filter '/test/' # for minitest
 end
 
+require 'codecov'
+SimpleCov.formatter = SimpleCov::Formatter::Codecov
+
 ENV['RAILS_ENV'] ||= 'test'
 
 require_relative '../config/environment'

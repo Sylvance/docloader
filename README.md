@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/Sylvance/docloader.svg?branch=master)](https://travis-ci.org/Sylvance/docloader)
 [![codecov](https://codecov.io/gh/Sylvance/docloader/branch/master/graph/badge.svg)](https://codecov.io/gh/Sylvance/docloader)
+[![Maintainability](https://api.codeclimate.com/v1/badges/fa05917ac026a437dcd4/maintainability)](https://codeclimate.com/github/Sylvance/docloader/maintainability)
 
 A simple document management application.
 
