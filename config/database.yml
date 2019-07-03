@@ -1,22 +1,37 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: db
+  username: postgres
+  password:
+  pool: 5
+
+development:
+  <<: *default
+  database: docloader_development
+
+test:
+  <<: *default
+  database: docloader_test
 # development:
 #   adapter: postgresql
 #   host: localhost
 #   username: user
 #   database: app-dev
-default: &default
-  adapter: postgresql
-  encoding: unicode
-  host: <%= ENV.fetch("POSTGRES_HOST", "db") %>
-  username: <%= ENV.fetch("POSTGRES_USERNAME", "") %>
-  password: <%= ENV.fetch("POSTGRES_PASSWORD", "") %>
-  database: <%= ENV.fetch("POSTGRES_DATABASE", "docloader") %>
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+# default: &default
+#   adapter: postgresql
+#   encoding: unicode
+#   host: <%= ENV.fetch("POSTGRES_HOST", "db") %>
+#   username: <%= ENV.fetch("POSTGRES_USERNAME", "") %>
+#   password: <%= ENV.fetch("POSTGRES_PASSWORD", "") %>
+#   database: <%= ENV.fetch("POSTGRES_DATABASE", "docloader") %>
+#   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
-development:
-  <<: *default
+# development:
+#   <<: *default
 
-test:
-  <<: *default
+# test:
+#   <<: *default
 # # PostgreSQL. Versions 9.1 and up are supported.
 # #
 # # Install the pg driver:

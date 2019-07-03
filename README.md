@@ -73,6 +73,9 @@ If you make changes to the Gemfile or the Compose file to try out some different
 - <https://tech.kartenmacherei.de/scaling-activestorage-21e962f708d7>
 - <https://medium.com/@wintermeyer/authentication-from-scratch-with-rails-5-2-92d8676f6836>
 - <https://gist.github.com/iscott/4618dc0c85acb3daa5c26641d8be8d0d>
+- <https://blog.imadityang.xyz/simple-guide-implement-travis-codeclimate-rails-app/>
+- <https://andycroll.com/ruby/use-simplecov/>
+- <https://isotope11.com/blog/getting-minitest-plus-spinach-coverage-reports-to-work-properly-with-simplecov>
 
 ## Author
 
