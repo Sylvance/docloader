@@ -6,6 +6,7 @@ services:
 
 env:
   global:
+    - CC_TEST_REPORTER_ID=99bf1b19a47d480e915386d119ab781ffff43bc34d4e99d0f843a905019fa36f
     - RAILS_ENV=test
 
 before_install:
